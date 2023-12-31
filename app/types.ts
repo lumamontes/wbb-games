@@ -188,4 +188,5 @@ export type GameCardProps = {
   gametime: string;
   location: string;
   venue: string;
+  index: number;
 };

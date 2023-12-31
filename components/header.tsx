@@ -7,7 +7,7 @@ export default function Header() {
         <ModeToggle />
       </header>
       <div className="max-w-5xl w-full items-center justify-center  text-sm flex flex-col gap-2">
-        <h1 className="text-xl">Today's Games 🏀⛹🏽‍♀️</h1>
+        <h1 className="text-xl">Today&apos;s Games 🏀⛹🏽‍♀️</h1>
         <p className="text-xs dark:text-gray-300">
           {new Date().toLocaleDateString(undefined, {
             year: "numeric",
