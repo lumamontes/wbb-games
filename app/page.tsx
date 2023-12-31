@@ -1,28 +1,26 @@
 import Footer from "@/components/Footer";
 import GameCard from "@/components/game-card";
 import Header from "@/components/header";
-
-async function getData() {
-  const res = await fetch(
-    "https://bc8b-2804-8d4-3a1-5b90-a474-8df9-6a70-8c1e.ngrok-free.app/schedulsse"
-  );
-
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
+import { Game, Games } from "./types";
+import { getData } from "./api";
 
 export default async function Home() {
   const data = await getData();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-16 dark:bg-slate-950 dark:text-white">
+    <main className="flex min-h-screen flex-col items-center pt-6 pb-16 px-4 bg-slate-100 dark:bg-slate-950 dark:text-white">
       <Header />
-      <div className="max-w-5xl w-full items-center justify-center text-sm lg:flex flex-col gap-3">
-        {data.games.map((game: any, index: any) => (
+      <h3 className="text-lg pt-6 pb-2">NCAA Women's Basketball</h3>
+      <div className="gap-3 max-w-5xl w-full items-center justify-center text-sm flex flex-col ">
+        {data.games.length === 0 && (
+          <p className="text-center text-lg py-6">
+            No games today!{" "}
+            <span role="img" aria-label="sad face">
+              🙁
+            </span>
+          </p>
+        )}
+        {data.games.map((game: Game, index: number) => (
           <GameCard
             key={index}
             gametime={game.date}
