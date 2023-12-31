@@ -9,9 +9,9 @@ export default function Home() {
       <header className="flex items-center justify-end w-full max-w-5xl">
         <ModeToggle />
       </header>
-      <div className="max-w-5xl w-full items-center justify-center font-mono text-sm lg:flex flex-col gap-6">
+      <div className="max-w-5xl w-full items-center justify-center  text-sm lg:flex flex-col gap-2">
         <h1 className="text-xl">Today's Games 🏀⛹🏽‍♀️</h1>
-        <p>
+        <p className="text-xs dark:text-gray-300">
           {new Date().toLocaleDateString(undefined, {
             year: "numeric",
             month: "long",
@@ -19,12 +19,14 @@ export default function Home() {
           })}
         </p>
       </div>
-      <div className="max-w-5xl w-full items-center justify-center font-mono text-sm lg:flex flex-col gap-6">
-        <h3 className="text-xl ">NCAA Women's Basketball</h3>
-        {mockdata.games.map((game: any) => (
+      <h3 className="text-lg pt-6 pb-2">NCAA Women's Basketball</h3>
+      <div className="max-w-5xl w-full items-center justify-center text-sm lg:flex flex-col gap-3">
+        {mockdata.games.map((game: any, index) => (
           <GameCard
+            key={index}
             gametime={game.date}
-            location={game.competitions[0].venue.fullName}
+            venue={game.competitions[0].venue.fullName}
+            location={`${game.competitions[0].venue.address.city}, ${game.competitions[0].venue.address.state}`}
             competitors={game.competitions[0].competitors}
           />
         ))}

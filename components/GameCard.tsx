@@ -85,6 +85,7 @@ type GameCardProps = {
   competitors: Competitor[];
   gametime: string;
   location: string;
+  venue: string;
 };
 
 export type Game = {
@@ -94,12 +95,13 @@ export type Game = {
 export default function GameCard({
   competitors,
   gametime,
+  venue,
   location,
 }: GameCardProps) {
   return (
-    <section className="flex flex-col items-center justify-center w-full max-w-2xl px-4 py-8 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800">
+    <section className="flex flex-col items-center justify-center w-full max-w-2xl px-4 py-4 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800">
       {competitors.map((competitor) => (
-        <div className="flex items-center justify-between w-full">
+        <div className="flex items-center justify-between w-full py-1">
           <div className="flex items-center justify-between w-full">
             <div className="flex items-center">
               <img
@@ -108,19 +110,25 @@ export default function GameCard({
                 alt="avatar"
               />
               <p className="mx-2 text-sm font-semibold text-gray-800 dark:text-gray-200">
-                {competitor.team.displayName}
+                {competitor.team.displayName}{" "}
+                {competitor.curatedRank.current <= 25
+                  ? `#${competitor.curatedRank.current}`
+                  : ""}
               </p>
             </div>
-            <p className="mx-2 text-sm font-semibold text-gray-800 dark:text-gray-200">
-              {competitor.score}
+            <p className="mx-2 text-sm text-gray-800 dark:text-gray-200">
+              {parseFloat(competitor.score) > 0 ? competitor.score : "TBD"}
             </p>
           </div>
         </div>
       ))}
 
-      <div className="flex items-center justify-between w-full">
+      <div className="flex items-center justify-between w-full py-1">
+        <p className="mx-2 text-xs text-gray-800 dark:text-gray-300">
+          {location} - {venue}
+        </p>
         <div className="flex items-center">
-          <p className="mx-2 text-sm font-semibold text-gray-800 dark:text-gray-200">
+          <p className="mx-2 text-xs text-gray-800 dark:text-gray-300 font-semibold">
             {new Date(gametime)
               .toLocaleTimeString(undefined, {
                 hour: "numeric",
@@ -131,9 +139,6 @@ export default function GameCard({
               .toLowerCase()}
           </p>
         </div>
-        <p className="mx-2 text-sm font-semibold text-gray-800 dark:text-gray-200">
-          {location}
-        </p>
       </div>
     </section>
   );
