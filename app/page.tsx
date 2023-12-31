@@ -1,27 +1,28 @@
 import Footer from "@/components/Footer";
-import mockdata from "../mockdata.json";
-import GameCard from "@/components/GameCard";
-import { ModeToggle } from "@/components/ModeToggle";
+import GameCard from "@/components/game-card";
+import Header from "@/components/header";
 
-export default function Home() {
+async function getData() {
+  const res = await fetch(
+    "https://bc8b-2804-8d4-3a1-5b90-a474-8df9-6a70-8c1e.ngrok-free.app/schedulsse"
+  );
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+
+export default async function Home() {
+  const data = await getData();
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-16 dark:bg-slate-950 dark:text-white">
-      <header className="flex items-center justify-end w-full max-w-5xl">
-        <ModeToggle />
-      </header>
-      <div className="max-w-5xl w-full items-center justify-center  text-sm lg:flex flex-col gap-2">
-        <h1 className="text-xl">Today's Games 🏀⛹🏽‍♀️</h1>
-        <p className="text-xs dark:text-gray-300">
-          {new Date().toLocaleDateString(undefined, {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </p>
-      </div>
-      <h3 className="text-lg pt-6 pb-2">NCAA Women's Basketball</h3>
+      <Header />
       <div className="max-w-5xl w-full items-center justify-center text-sm lg:flex flex-col gap-3">
-        {mockdata.games.map((game: any, index) => (
+        {data.games.map((game: any, index: any) => (
           <GameCard
             key={index}
             gametime={game.date}
