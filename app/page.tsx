@@ -22,6 +22,7 @@ export default async function Home() {
         )}
         {data.games.map((game: Game, index: number) => (
           <GameCard
+            key={index}
             index={index}
             gametime={game.date}
             venue={game.competitions[0].venue.fullName}

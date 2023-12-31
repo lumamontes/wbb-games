@@ -12,8 +12,11 @@ export default function GameCard({
       key={index}
       className="flex flex-col items-center justify-center w-full max-w-2xl px-4 py-4 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800"
     >
-      {competitors.map((competitor) => (
-        <div className="flex items-center justify-between w-full py-1">
+      {competitors.map((competitor, index) => (
+        <div
+          key={index}
+          className="flex items-center justify-between w-full py-1"
+        >
           <div className="flex items-center justify-between w-full">
             <div className="flex items-center">
               <img
