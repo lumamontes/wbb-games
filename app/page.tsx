@@ -1,4 +1,4 @@
-import Footer from "@/components/Footer";
+import Footer from "@/components/footer";
 import GameCard from "@/components/game-card";
 import Header from "@/components/header";
 import { Game, Games } from "./types";
