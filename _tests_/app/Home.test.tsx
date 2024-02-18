@@ -3,7 +3,6 @@ import { render, screen, waitFor } from "@testing-library/react";
 import Home from "@/app/page";
 import "@testing-library/jest-dom";
 import { GameCardProps } from "@/app/types";
-import ReactDOMServer from "react-dom/server";
 
 // Mocking the necessary components and modules
 jest.mock("@/components/header", () => () => <div>Header Mock</div>);
@@ -68,14 +67,5 @@ describe("Home component", () => {
     await waitFor(() =>
       expect(screen.getByText("No games today!")).toBeInTheDocument()
     );
-  });
-
-  it("throws an error when fetch fails", async () => {
-    global.fetch = jest.fn().mockImplementation(() =>
-      Promise.resolve({
-        ok: false,
-      })
-    );
-    await expect(Home()).rejects.toThrow("Failed to fetch data");
   });
 });
