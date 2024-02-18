@@ -11,6 +11,7 @@ export default function GameCard({
 }: GameCardProps) {
   return (
     <section
+      data-testid="game-card"
       key={index}
       className="flex flex-col items-center justify-center w-full max-w-2xl px-4 py-4 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800"
     >
@@ -33,7 +34,10 @@ export default function GameCard({
                   : ""}
               </p>
             </div>
-            <p className="mx-2 text-sm text-gray-800 dark:text-gray-200">
+            <p
+              data-testid="score"
+              className="mx-2 text-sm text-gray-800 dark:text-gray-200"
+            >
               {parseFloat(competitor.score) > 0 ? competitor.score : "TBD"}
             </p>
           </div>

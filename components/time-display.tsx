@@ -14,7 +14,10 @@ const TimeDisplay: React.FC<TimeDisplayProps> = ({
   timeZone,
 }) => {
   return (
-    <p className="mx-2 text-xs text-gray-800 dark:text-gray-300 font-medium gap-1 flex items-center">
+    <p
+      data-testid="time-display"
+      className="mx-2 text-xs text-gray-800 dark:text-gray-300 font-medium gap-1 flex items-center"
+    >
       <span className="text-lg">{flag}</span>
       {new Date(gametime)
         .toLocaleTimeString(locale, {
