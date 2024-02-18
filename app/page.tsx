@@ -2,7 +2,20 @@ import Footer from "@/components/Footer";
 import GameCard from "@/components/game-card";
 import Header from "@/components/header";
 import { Game, Games } from "./types";
-import { getData } from "./api";
+
+async function getData() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/schedule`, {
+    next: { revalidate: 3600 },
+  });
+  console.log(process.env.NEXT_PUBLIC_API_URL);
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
 
 export default async function Home() {
   const data = await getData();
@@ -28,6 +41,7 @@ export default async function Home() {
             venue={game.competitions[0].venue.fullName}
             location={`${game.competitions[0].venue.address.city}, ${game.competitions[0].venue.address.state}`}
             competitors={game.competitions[0].competitors}
+            locale={"en-US"}
           />
         ))}
       </div>

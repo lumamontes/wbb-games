@@ -1,4 +1,5 @@
 import { GameCardProps } from "@/app/types";
+import TimeDisplay from "./time-display";
 
 export default function GameCard({
   competitors,
@@ -6,6 +7,7 @@ export default function GameCard({
   venue,
   location,
   index,
+  locale,
 }: GameCardProps) {
   return (
     <section
@@ -39,20 +41,22 @@ export default function GameCard({
       ))}
 
       <div className="flex items-center justify-between w-full py-1">
-        <p className="mx-2 text-xs text-gray-800 dark:text-gray-300">
+        <p className="mx-2 text-xs text-gray-800 dark:text-gray-300 self-end">
           {location} - {venue}
         </p>
-        <div className="flex items-center">
-          <p className="mx-2 text-xs text-gray-800 dark:text-gray-300 font-semibold">
-            {new Date(gametime)
-              .toLocaleTimeString(undefined, {
-                hour: "numeric",
-                minute: "numeric",
-              })
-              .split(" ")
-              .join("")
-              .toLowerCase()}
-          </p>
+        <div className="flex flex-col ">
+          <TimeDisplay
+            gametime={gametime}
+            locale="en-US"
+            flag="🇺🇸"
+            timeZone="America/New_York"
+          />
+          <TimeDisplay
+            gametime={gametime}
+            locale="pt-BR"
+            flag="🇧🇷"
+            timeZone="America/Sao_Paulo"
+          />
         </div>
       </div>
     </section>
