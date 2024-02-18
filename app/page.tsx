@@ -1,13 +1,10 @@
-import Footer from "@/components/Footer";
+import Footer from "@/components/footer";
 import GameCard from "@/components/game-card";
 import Header from "@/components/header";
-import { Game, Games } from "./types";
+import { Game } from "./types";
 
 async function getData() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/schedule`, {
-    next: { revalidate: 3600 },
-  });
-  console.log(process.env.NEXT_PUBLIC_API_URL);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/schedule`);
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary

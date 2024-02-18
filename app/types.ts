@@ -37,7 +37,7 @@ type Competition = {
     capacity: number;
     indoor: boolean;
   };
-  competitors: Competitor[]; // Replace 'any' with the actual type of the competitors
+  competitors: Competitor[];
   status: Status;
   broadcasts: {
     market: string;
