@@ -4,8 +4,11 @@ import Header from "@/components/header";
 import { Game } from "./types";
 
 async function getData() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/schedule`);
-
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/schedule`, {
+    next: {
+      revalidate: 600,
+    },
+  });
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
@@ -21,7 +24,7 @@ export default async function Home() {
     <main className="flex min-h-screen flex-col items-center pt-6 pb-16 px-4 bg-slate-100 dark:bg-slate-950 dark:text-white">
       <Header />
       <h3 className="text-lg pt-6 pb-2">NCAA Women&apos;s Basketball</h3>
-      <div className="gap-3 max-w-5xl w-full items-center justify-center text-sm flex flex-col">
+      <section className="gap-3 max-w-5xl w-full items-center justify-center text-sm flex flex-col">
         {data.games.length === 0 && (
           <p className="text-center text-lg py-6">
             No games today!{" "}
@@ -41,7 +44,7 @@ export default async function Home() {
             locale={"en-US"}
           />
         ))}
-      </div>
+      </section>
       <Footer />
     </main>
   );
