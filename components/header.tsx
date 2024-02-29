@@ -9,10 +9,10 @@ export default function Header() {
       <div className="max-w-5xl w-full items-center justify-center  text-sm flex flex-col gap-2">
         <h1 className="text-xl">Today&apos;s Games 🏀⛹🏽‍♀️</h1>
         <p className="text-xs dark:text-gray-300">
-          {new Date().toLocaleDateString(undefined, {
-            year: "numeric",
+          {new Date().toLocaleDateString("en-US", {
             month: "long",
             day: "numeric",
+            year: "numeric",
           })}
         </p>
       </div>
